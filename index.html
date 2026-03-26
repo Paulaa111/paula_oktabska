@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Paula Oktabska • IT dla Cukierni</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0b14;
+      font-family: 'DM Sans', sans-serif;
+      color: #f0eaf8;
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px 14px 40px;
+    }
+
+    .card {
+      background: linear-gradient(160deg, #1a1428 0%, #0e0b14 55%, #150f22 100%);
+      border: 1px solid rgba(255, 80, 180, 0.18);
+      border-radius: 28px;
+      padding: 34px 22px 28px;
+      width: 100%;
+      max-width: 390px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.65),
+        0 0 80px rgba(180, 60, 255, 0.06);
+      text-align: center;
+      animation: fadeUp .55s cubic-bezier(.22,.68,0,1.2) both;
+    }
+
+    /* glow orbs */
+    .card::before {
+      content: '';
+      position: absolute; top: -70px; right: -70px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(255,80,180,.14) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .card::after {
+      content: '';
+      position: absolute; bottom: -50px; left: -50px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(140,60,255,.11) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    /* avatar */
+    .avatar {
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff50b4, #8c3cff);
+      margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 0 30px rgba(255,80,180,.4);
+    }
+
+    /* name / title */
+    .name {
+      font-family: 'Syne', sans-serif;
+      font-size: 23px; font-weight: 800;
+      color: #fff;
+      letter-spacing: -.3px;
+      margin-bottom: 7px;
+    }
+    .sub {
+      font-size: 12.5px;
+      color: rgba(255,255,255,.44);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    /* status */
+    .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0, 220, 120, .08);
+      border: 1px solid rgba(0, 220, 120, .26);
+      border-radius: 100px;
+      padding: 5px 15px;
+      font-size: 12px; color: #00dc78;
+      margin-bottom: 24px;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      background: #00dc78; border-radius: 50%;
+      box-shadow: 0 0 6px #00dc78;
+      animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    /* section label */
+    .label {
+      font-size: 10px; letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: rgba(255,80,180,.72);
+      margin-bottom: 13px;
+    }
+
+    /* tags */
+    .tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .tag {
+      background: rgba(255,80,180,.08);
+      border: 1px solid rgba(255,80,180,.22);
+      border-radius: 100px;
+      padding: 5px 13px;
+      font-size: 11.5px;
+      color: rgba(255,255,255,.82);
+    }
+
+    /* divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,80,180,.32), transparent);
+      margin: 22px 0;
+    }
+
+    /* buttons */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 15px 18px;
+      margin-bottom: 10px;
+      border-radius: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none; outline: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: transform .13s, box-shadow .13s;
+    }
+    .btn:active { transform: scale(.955); }
+
+    .primary {
+      background: linear-gradient(135deg, #ff50b4, #c830ff);
+      color: #fff;
+      box-shadow: 0 4px 22px rgba(255,80,180,.38);
+    }
+    .primary:hover { box-shadow: 0 6px 30px rgba(255,80,180,.52); }
+
+    .ghost {
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.09);
+      color: rgba(255,255,255,.82);
+      justify-content: space-between;
+      font-weight: 400;
+      font-size: 14.5px;
+    }
+    .ghost:hover { background: rgba(255,255,255,.075); }
+    .arrow { opacity: .35; font-size: 15px; }
+
+    /* counter */
+    .counter {
+      font-size: 10px;
+      color: rgba(255,255,255,.17);
+      margin-top: 20px;
+    }
+    .counter b { color: rgba(255,80,180,.55); font-weight: 500; }
+
+    /* animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(1.38); }
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="avatar">🍰</div>
+  <div class="name">Paula Oktabska</div>
+  <div class="sub">Automatyzacja Marketingu & UX<br>IT dla Cukierni</div>
+
+  <div class="status">
+    <div class="dot"></div>
+    Dostępna teraz &nbsp;·&nbsp; Krosno / zdalnie
+  </div>
+
+  <div class="label">Co robię</div>
+  <div class="tags">
+    <span class="tag">🚀 Automatyzacja Sprzedaży</span>
+    <span class="tag">🎨 Nowoczesne Strony WWW</span>
+    <span class="tag">📈 Marketing</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <a href="https://smartorder.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn primary">
+    🚀 &nbsp; Konfigurator tortów – Sprawdź DEMO
+  </a>
+
+  <a href="tel:+48728470916" class="btn ghost">
+    <span>📞 &nbsp; Zadzwoń teraz</span>
+    <span class="arrow">›</span>
+  </a>
+
+  <a href="https://wa.me/48728470916?text=Cze%C5%9B%C4%87%20Paula!%20Widzia%C5%82am%20Twoj%C4%85%20wizyt%C3%B3wk%C4%99%20i%20chc%C4%99%20zapyta%C4%87%20o%20wsp%C3%B3%C5%82prac%C4%99."
+     target="_blank" rel="noopener noreferrer" class="btn ghost">
+    <span>💬 &nbsp; WhatsApp</span>
+    <span class="arrow">›</span>
+  </a>
+
+  <a href="mailto:paulaoktabska@gmail.com" class="btn ghost">
+    <span>✉️ &nbsp; Wyślij e-mail</span>
+    <span class="arrow">›</span>
+  </a>
+
+  <div class="counter" id="counter">Ładowanie odwiedzin...</div>
+
+</div>
+
+<!-- Prosty licznik przez localStorage -->
+<script>
+  const key = 'paula_card_visits';
+  // Jeśli chcesz licznik globalny - podepnij np. countapi.xyz
+  // Na razie lokalny (per przeglądarka) żeby coś pokazać
+  try {
+    const n = parseInt(localStorage.getItem(key) || '0') + 1;
+    localStorage.setItem(key, n);
+    // Spróbuj pobrać globalny licznik z countapi
+    fetch('https://api.countapi.xyz/hit/paula-oktabska-card/visits')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('counter').innerHTML =
+          'Wizytówka odwiedzona <b>' + d.value + '</b> razy';
+      })
+      .catch(() => {
+        document.getElementById('counter').innerHTML =
+          'Wizytówka odwiedzona <b>' + n + '</b> razy';
+      });
+  } catch(e) {
+    document.getElementById('counter').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
