@@ -6,242 +6,401 @@
   <title>Paula Oktabska • IT dla Cukierni</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg:          #e8e4e0;
+      --card:        #f0ecе6;
+      --pink:        #f2a0b8;
+      --pink-deep:   #e06080;
+      --violet:      #4a3ab8;
+      --violet-mid:  #6655d4;
+      --violet-pale: #dcd8f8;
+      --orange:      #e85820;
+      --orange-pale: #fce4d8;
+      --gray-dark:   #2e2e2e;
+      --gray-mid:    #7a7670;
+      --gray-light:  #d8d4ce;
+      --white:       #faf8f5;
+    }
+
     body {
-      background: #1a1208;
-      font-family: 'DM Sans', sans-serif;
-      color: #f5e6c8;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 15% 85%, rgba(242,160,184,.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 10%, rgba(74,58,184,.12) 0%, transparent 45%);
+      font-family: 'Outfit', sans-serif;
       min-height: 100dvh;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 20px 14px 40px;
-      background-image: radial-gradient(rgba(212,160,50,.05) 1px, transparent 1px);
-      background-size: 22px 22px;
+      padding: 28px 16px 48px;
     }
 
+    /* ══ CARD ══ */
     .card {
-      background: linear-gradient(160deg, #241a08 0%, #1a1208 55%, #1e1508 100%);
-      border: 1px solid rgba(212,160,50,.22);
+      background: var(--white);
       border-radius: 28px;
-      padding: 40px 26px 28px;
       width: 100%;
-      max-width: 390px;
+      max-width: 380px;
+      padding: 36px 28px 26px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,.7), 0 0 80px rgba(180,100,20,.07);
-      text-align: center;
-      animation: fadeUp .55s cubic-bezier(.22,.68,0,1.2) both;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,.9) inset,
+        0 24px 60px rgba(46,46,46,.14),
+        0 4px 12px rgba(46,46,46,.08);
+      animation: rise .6s cubic-bezier(.22,.68,0,1.2) both;
     }
 
-    .card::before {
-      content: '';
-      position: absolute; top: -70px; right: -70px;
-      width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(212,160,50,.13) 0%, transparent 68%);
+    /* ── decorative background layer ── */
+    .deco {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: 28px;
+    }
+
+    /* large blob top-right */
+    .blob-tr {
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+    }
+    /* small blob bottom-left */
+    .blob-bl {
+      position: absolute;
+      bottom: -50px; left: -40px;
+      width: 200px; height: 200px;
+      opacity: .7;
+    }
+
+    /* ── star elements ── */
+    .star {
+      position: absolute;
       pointer-events: none;
     }
-    .card::after {
-      content: '';
-      position: absolute; bottom: -50px; left: -50px;
-      width: 220px; height: 220px;
-      background: radial-gradient(circle, rgba(180,70,30,.11) 0%, transparent 68%);
-      pointer-events: none;
+    .star svg { display: block; }
+
+    .s1 { top: 22px;  left: 24px;  }
+    .s2 { top: 18px;  right: 26px; }
+    .s3 { bottom: 80px; right: 20px; }
+    .s4 { bottom: 160px; left: 18px; opacity: .45; }
+
+    /* ══ HEADER ══ */
+    .status {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--violet-pale);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11px; font-weight: 500;
+      color: var(--violet);
+      margin-bottom: 20px;
+      position: relative; z-index: 2;
+    }
+    .sdot {
+      width: 6px; height: 6px;
+      background: #3db87a; border-radius: 50%;
+      box-shadow: 0 0 5px #3db87a;
+      animation: blink 2s ease-in-out infinite;
     }
 
-    .card-topline {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #b44a1e, #d4a032, #b44a1e);
-      border-radius: 28px 28px 0 0;
+    .name-block {
+      position: relative; z-index: 2;
+      margin-bottom: 6px;
     }
-
-    /* Cienki, lekki serif – nowoczesne retro */
-    .name {
-      font-family: 'Cormorant', serif;
-      font-size: 38px;
-      font-weight: 300;
-      font-style: italic;
-      color: #f5e6c8;
-      letter-spacing: 1px;
-      line-height: 1.1;
-      margin-bottom: 10px;
+    .name-top {
+      font-family: 'Syne', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--gray-dark);
+      line-height: .95;
+      letter-spacing: -1px;
+    }
+    .name-bot {
+      font-family: 'Syne', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: .95;
+      letter-spacing: -1px;
     }
 
     .sub {
-      font-size: 12px;
-      font-weight: 300;
-      color: rgba(245,230,200,.42);
-      line-height: 1.55;
-      margin-bottom: 18px;
+      font-size: 12px; font-weight: 300;
+      color: var(--gray-mid);
       letter-spacing: .3px;
+      line-height: 1.55;
+      margin-bottom: 22px;
+      position: relative; z-index: 2;
     }
 
-    .status {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(212,160,50,.07);
-      border: 1px solid rgba(212,160,50,.28);
-      border-radius: 100px;
-      padding: 5px 15px;
-      font-size: 12px; color: #d4a032;
-      margin-bottom: 26px;
-    }
-    .dot {
-      width: 7px; height: 7px;
-      background: #d4a032; border-radius: 50%;
-      box-shadow: 0 0 6px #d4a032;
-      animation: pulse 2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-
-    .label {
-      font-size: 10px; letter-spacing: 2.5px;
+    /* ══ TAGS ══ */
+    .section-label {
+      font-size: 9px; letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(180,74,30,.85);
-      margin-bottom: 13px;
+      color: var(--orange);
+      font-weight: 600;
+      margin-bottom: 10px;
+      position: relative; z-index: 2;
     }
-
     .tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: center;
-      margin-bottom: 26px;
+      display: flex; flex-wrap: wrap; gap: 7px;
+      margin-bottom: 24px;
+      position: relative; z-index: 2;
     }
     .tag {
-      background: rgba(212,160,50,.07);
-      border: 1px solid rgba(212,160,50,.2);
+      background: var(--orange-pale);
       border-radius: 100px;
       padding: 5px 13px;
-      font-size: 11.5px;
-      color: rgba(245,230,200,.78);
+      font-size: 11.5px; font-weight: 500;
+      color: var(--orange);
+    }
+    .tag.violet {
+      background: var(--violet-pale);
+      color: var(--violet);
     }
 
+    /* ══ DIVIDER ══ */
     .divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212,160,50,.32), transparent);
-      margin: 22px 0;
+      background: var(--gray-light);
+      margin: 20px 0;
+      position: relative; z-index: 2;
     }
 
-    .btn {
+    /* ══ CTA button ══ */
+    .btn-primary {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 15px 18px;
-      margin-bottom: 10px;
-      border-radius: 16px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px; font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: none; outline: none;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-      transition: transform .13s, box-shadow .13s;
-    }
-    .btn:active { transform: scale(.955); }
-
-    .primary {
-      background: linear-gradient(135deg, #d4a032, #b44a1e);
-      color: #1a1208;
-      font-weight: 700;
-      box-shadow: 0 4px 22px rgba(212,160,50,.32);
-    }
-    .primary:hover { box-shadow: 0 6px 30px rgba(212,160,50,.5); }
-
-    .ghost {
-      background: rgba(245,230,200,.04);
-      border: 1px solid rgba(245,230,200,.08);
-      color: rgba(245,230,200,.78);
       justify-content: space-between;
-      font-weight: 400;
-      font-size: 14.5px;
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--violet);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 10px;
+      position: relative; z-index: 2;
+      transition: transform .12s;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: .1px;
     }
-    .ghost:hover { background: rgba(245,230,200,.08); }
-    .arrow { opacity: .32; font-size: 15px; }
+    .btn-primary:active { transform: scale(.97); }
+    .btn-arr {
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
 
-    .counter {
+    /* ══ link rows ══ */
+    .link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: transparent;
+      border: 1.5px solid var(--gray-light);
+      color: var(--gray-dark);
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 400;
+      text-decoration: none;
+      margin-bottom: 8px;
+      position: relative; z-index: 2;
+      transition: border-color .12s, background .12s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .link-row:hover   { border-color: var(--pink-deep); background: #fdf0f4; }
+    .link-row:active  { transform: scale(.975); }
+    .link-left        { display: flex; align-items: center; gap: 10px; }
+    .link-ico {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: var(--gray-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .link-arr { color: var(--gray-light); font-size: 17px; }
+
+    /* ══ FOOTER ══ */
+    .foot {
+      text-align: center;
+      padding-top: 18px;
       font-size: 10px;
-      color: rgba(245,230,200,.15);
-      margin-top: 20px;
+      color: var(--gray-mid);
+      position: relative; z-index: 2;
     }
-    .counter b { color: rgba(212,160,50,.55); font-weight: 500; }
+    .foot b { color: var(--violet-mid); font-weight: 600; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(26px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-    @keyframes pulse {
+    @keyframes blink {
       0%,100% { opacity: 1; transform: scale(1); }
-      50%      { opacity: .5; transform: scale(1.38); }
+      50%      { opacity: .4; transform: scale(1.5); }
     }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes spinRev {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+    .spin-slow { animation: spinSlow 18s linear infinite; transform-origin: center; }
+    .spin-rev  { animation: spinRev 14s linear infinite; transform-origin: center; }
   </style>
 </head>
 <body>
 <div class="card">
-  <div class="card-topline"></div>
 
-  <div class="name">Paula Oktabska</div>
-  <div class="sub">Automatyzacja Marketingu & UX<br>IT dla Cukierni</div>
+  <!-- ── decorative layer ── -->
+  <div class="deco">
+    <!-- blob top-right: pink -->
+    <svg class="blob-tr" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M180 20 C220 0 250 55 238 105 C226 155 188 200 138 205 C88 210 38 178 18 135 C-2 92 12 42 52 20 C92 -2 140 40 180 20Z" fill="#f2a0b8" opacity=".22"/>
+      <path d="M165 35 C200 18 228 65 216 110 C204 155 170 195 125 198 C80 201 36 172 18 132 C0 92 14 48 50 28 C86 8 130 52 165 35Z" fill="#f2a0b8" opacity=".15"/>
+    </svg>
 
-  <div class="status">
-    <div class="dot"></div>
-    Dostępna teraz &nbsp;·&nbsp; Krosno / zdalnie
+    <!-- blob bottom-left: violet -->
+    <svg class="blob-bl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M155 10 C195 -5 218 50 205 98 C192 146 155 188 108 192 C61 196 18 165 5 122 C-8 79 8 34 46 14 C84 -6 115 25 155 10Z" fill="#4a3ab8" opacity=".10"/>
+    </svg>
+
+    <!-- star 1: large pink — top left -->
+    <div class="star s1">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+        <g class="spin-slow">
+          <line x1="19" y1="2"  x2="19" y2="36" stroke="#e06080" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="2"  y1="19" x2="36" y2="19" stroke="#e06080" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="6"  y1="6"  x2="32" y2="32" stroke="#e06080" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="32" y1="6"  x2="6"  y2="32" stroke="#e06080" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="19" cy="19" r="3.5" fill="#e06080"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- star 2: small violet — top right -->
+    <div class="star s2">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <g class="spin-rev">
+          <line x1="11" y1="1"  x2="11" y2="21" stroke="#4a3ab8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="1"  y1="11" x2="21" y2="11" stroke="#4a3ab8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="3"  y1="3"  x2="19" y2="19" stroke="#4a3ab8" stroke-width="2"   stroke-linecap="round"/>
+          <line x1="19" y1="3"  x2="3"  y2="19" stroke="#4a3ab8" stroke-width="2"   stroke-linecap="round"/>
+          <circle cx="11" cy="11" r="2.5" fill="#4a3ab8"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- star 3: orange — bottom right -->
+    <div class="star s3">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <g class="spin-slow">
+          <line x1="15" y1="1"  x2="15" y2="29" stroke="#e85820" stroke-width="3" stroke-linecap="round"/>
+          <line x1="1"  y1="15" x2="29" y2="15" stroke="#e85820" stroke-width="3" stroke-linecap="round"/>
+          <line x1="4"  y1="4"  x2="26" y2="26" stroke="#e85820" stroke-width="2" stroke-linecap="round"/>
+          <line x1="26" y1="4"  x2="4"  y2="26" stroke="#e85820" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="15" cy="15" r="3" fill="#e85820"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- star 4: tiny pink — bottom left -->
+    <div class="star s4">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <g class="spin-rev">
+          <line x1="9" y1="1"  x2="9"  y2="17" stroke="#f2a0b8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="1" y1="9"  x2="17" y2="9"  stroke="#f2a0b8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="2" y1="2"  x2="16" y2="16" stroke="#f2a0b8" stroke-width="2"   stroke-linecap="round"/>
+          <line x1="16" y1="2" x2="2"  y2="16" stroke="#f2a0b8" stroke-width="2"   stroke-linecap="round"/>
+          <circle cx="9" cy="9" r="2" fill="#f2a0b8"/>
+        </g>
+      </svg>
+    </div>
   </div>
 
-  <div class="label">Co robię</div>
+  <!-- ── CONTENT ── -->
+  <div class="status">
+    <div class="sdot"></div>
+    Dostępna teraz · Krosno / zdalnie
+  </div>
+
+  <div class="name-block">
+    <div class="name-top">PAULA</div>
+    <div class="name-bot">OKTABSKA</div>
+  </div>
+
+  <div class="sub">Automatyzacja Marketingu & UX<br>IT dla Cukierni</div>
+
+  <div class="section-label">Specjalizacje</div>
   <div class="tags">
-    <span class="tag">🚀 Automatyzacja Sprzedaży</span>
-    <span class="tag">🎨 Nowoczesne Strony WWW</span>
+    <span class="tag">🚀 Automatyzacja</span>
+    <span class="tag violet">🎨 Strony WWW</span>
     <span class="tag">📈 Marketing online</span>
   </div>
 
-  <div class="divider"></div>
-
-  <a href="https://smartorder.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn primary">
-    🚀 &nbsp; Konfigurator tortów – Sprawdź DEMO
+  <a href="https://smartorder.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+    <span>🍰 &nbsp; Konfigurator tortów — DEMO</span>
+    <div class="btn-arr">›</div>
   </a>
 
-  <a href="tel:+48728470916" class="btn ghost">
-    <span>📞 &nbsp; Zadzwoń teraz</span>
-    <span class="arrow">›</span>
+  <div class="divider"></div>
+
+  <a href="tel:+48728470916" class="link-row">
+    <div class="link-left">
+      <div class="link-ico">📞</div>
+      <span>Zadzwoń teraz</span>
+    </div>
+    <span class="link-arr">›</span>
   </a>
 
   <a href="https://wa.me/48728470916?text=Cze%C5%9B%C4%87%20Paula!%20Widzia%C5%82am%20Twoj%C4%85%20wizyt%C3%B3wk%C4%99%20i%20chc%C4%99%20zapyta%C4%87%20o%20wsp%C3%B3%C5%82prac%C4%99."
-     target="_blank" rel="noopener noreferrer" class="btn ghost">
-    <span>💬 &nbsp; WhatsApp</span>
-    <span class="arrow">›</span>
+     target="_blank" rel="noopener noreferrer" class="link-row">
+    <div class="link-left">
+      <div class="link-ico">💬</div>
+      <span>WhatsApp</span>
+    </div>
+    <span class="link-arr">›</span>
   </a>
 
-  <a href="mailto:paulaoktabska@gmail.com" class="btn ghost">
-    <span>✉️ &nbsp; Wyślij e-mail</span>
-    <span class="arrow">›</span>
+  <a href="mailto:paulaoktabska@gmail.com" class="link-row">
+    <div class="link-left">
+      <div class="link-ico">✉️</div>
+      <span>Wyślij e-mail</span>
+    </div>
+    <span class="link-arr">›</span>
   </a>
 
-  <div class="counter" id="counter">Ładowanie odwiedzin...</div>
+  <div class="foot" id="counter">…</div>
 </div>
 
 <script>
-  const key = 'paula_card_visits';
+  const key = 'paula_card_v4';
   try {
     const n = parseInt(localStorage.getItem(key) || '0') + 1;
     localStorage.setItem(key, n);
     fetch('https://api.countapi.xyz/hit/paula-oktabska-card/visits')
       .then(r => r.json())
       .then(d => {
-        document.getElementById('counter').innerHTML =
-          'Wizytówka odwiedzona <b>' + d.value + '</b> razy';
+        document.getElementById('counter').innerHTML = 'Wizytówka odwiedzona <b>' + d.value + '</b> razy';
       })
       .catch(() => {
-        document.getElementById('counter').innerHTML =
-          'Wizytówka odwiedzona <b>' + n + '</b> razy';
+        document.getElementById('counter').innerHTML = 'Wizytówka odwiedzona <b>' + n + '</b> razy';
       });
   } catch(e) {
     document.getElementById('counter').style.display = 'none';
   }
 </script>
-
 </body>
 </html>
