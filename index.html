@@ -12,7 +12,7 @@
 
     :root {
       --bg:          #e8e4e0;
-      --card:        #f0ecе6;
+      --card:        #f0ece6;
       --pink:        #f2a0b8;
       --pink-deep:   #e06080;
       --violet:      #4a3ab8;
@@ -64,13 +64,11 @@
       border-radius: 28px;
     }
 
-    /* large blob top-right */
     .blob-tr {
       position: absolute;
       top: -60px; right: -60px;
       width: 240px; height: 240px;
     }
-    /* small blob bottom-left */
     .blob-bl {
       position: absolute;
       bottom: -50px; left: -40px;
@@ -78,13 +76,8 @@
       opacity: .7;
     }
 
-    /* ── star elements ── */
-    .star {
-      position: absolute;
-      pointer-events: none;
-    }
+    .star { position: absolute; pointer-events: none; }
     .star svg { display: block; }
-
     .s1 { top: 22px;  left: 24px;  }
     .s2 { top: 18px;  right: 26px; }
     .s3 { bottom: 80px; right: 20px; }
@@ -114,26 +107,21 @@
     }
     .name-top {
       font-family: 'Syne', sans-serif;
-      font-size: 34px;
-      font-weight: 800;
+      font-size: 34px; font-weight: 800;
       color: var(--gray-dark);
-      line-height: .95;
-      letter-spacing: -1px;
+      line-height: .95; letter-spacing: -1px;
     }
     .name-bot {
       font-family: 'Syne', sans-serif;
-      font-size: 34px;
-      font-weight: 800;
+      font-size: 34px; font-weight: 800;
       color: var(--orange);
-      line-height: .95;
-      letter-spacing: -1px;
+      line-height: .95; letter-spacing: -1px;
     }
 
     .sub {
       font-size: 12px; font-weight: 300;
       color: var(--gray-mid);
-      letter-spacing: .3px;
-      line-height: 1.55;
+      letter-spacing: .3px; line-height: 1.55;
       margin-bottom: 22px;
       position: relative; z-index: 2;
     }
@@ -142,8 +130,7 @@
     .section-label {
       font-size: 9px; letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--orange);
-      font-weight: 600;
+      color: var(--orange); font-weight: 600;
       margin-bottom: 10px;
       position: relative; z-index: 2;
     }
@@ -172,7 +159,7 @@
       position: relative; z-index: 2;
     }
 
-    /* ══ CTA button ══ */
+    /* ══ CTA buttons ══ */
     .btn-primary {
       display: flex;
       align-items: center;
@@ -180,24 +167,44 @@
       width: 100%;
       padding: 16px 18px;
       border-radius: 16px;
-      background: var(--violet);
       color: #fff;
       font-family: 'Outfit', sans-serif;
       font-size: 14px; font-weight: 600;
       text-decoration: none;
       margin-bottom: 10px;
       position: relative; z-index: 2;
-      transition: transform .12s;
+      transition: transform .12s, opacity .12s;
       -webkit-tap-highlight-color: transparent;
       letter-spacing: .1px;
     }
     .btn-primary:active { transform: scale(.97); }
+    .btn-primary.violet { background: var(--violet); }
+    .btn-primary.orange { background: linear-gradient(135deg, #e85820 0%, #e06080 100%); }
+
     .btn-arr {
       width: 30px; height: 30px;
       background: rgba(255,255,255,.2);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 15px; flex-shrink: 0;
+    }
+
+    /* ══ app-wake notice ══ */
+    .app-notice {
+      position: relative; z-index: 2;
+      background: #fdf5f0;
+      border: 1.5px solid var(--orange-pale);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-top: -2px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--gray-mid);
+      line-height: 1.55;
+    }
+    .app-notice strong {
+      color: var(--orange);
+      font-weight: 600;
     }
 
     /* ══ link rows ══ */
@@ -260,25 +267,20 @@
     .spin-slow { animation: spinSlow 18s linear infinite; transform-origin: center; }
     .spin-rev  { animation: spinRev 14s linear infinite; transform-origin: center; }
   </style>
-  <script src="https://t.contentsquare.net/uxa/6b2e4f3ba4f61.js"></script>
 </head>
 <body>
 <div class="card">
 
   <!-- ── decorative layer ── -->
   <div class="deco">
-    <!-- blob top-right: pink -->
     <svg class="blob-tr" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M180 20 C220 0 250 55 238 105 C226 155 188 200 138 205 C88 210 38 178 18 135 C-2 92 12 42 52 20 C92 -2 140 40 180 20Z" fill="#f2a0b8" opacity=".22"/>
       <path d="M165 35 C200 18 228 65 216 110 C204 155 170 195 125 198 C80 201 36 172 18 132 C0 92 14 48 50 28 C86 8 130 52 165 35Z" fill="#f2a0b8" opacity=".15"/>
     </svg>
-
-    <!-- blob bottom-left: violet -->
     <svg class="blob-bl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M155 10 C195 -5 218 50 205 98 C192 146 155 188 108 192 C61 196 18 165 5 122 C-8 79 8 34 46 14 C84 -6 115 25 155 10Z" fill="#4a3ab8" opacity=".10"/>
     </svg>
 
-    <!-- star 1: large pink — top left -->
     <div class="star s1">
       <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
         <g class="spin-slow">
@@ -290,8 +292,6 @@
         </g>
       </svg>
     </div>
-
-    <!-- star 2: small violet — top right -->
     <div class="star s2">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <g class="spin-rev">
@@ -303,8 +303,6 @@
         </g>
       </svg>
     </div>
-
-    <!-- star 3: orange — bottom right -->
     <div class="star s3">
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
         <g class="spin-slow">
@@ -316,8 +314,6 @@
         </g>
       </svg>
     </div>
-
-    <!-- star 4: tiny pink — bottom left -->
     <div class="star s4">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
         <g class="spin-rev">
@@ -346,13 +342,22 @@
 
   <div class="section-label">Specjalizacje</div>
   <div class="tags">
-    <span class="tag">🚀 Automatyzacja</span>
-    <span class="tag violet">🎨 Strony WWW</span>
-    <span class="tag">📈 Marketing online</span>
+    <span class="tag">Automatyzacja</span>
+    <span class="tag violet">Strony WWW</span>
+    <span class="tag">Marketing online</span>
   </div>
 
-  <a href="https://smartorder.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
-    <span>🍰 &nbsp; Konfigurator tortów — DEMO</span>
+  <a href="https://sweettable.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn-primary orange">
+    <span>Konfigurator słodkich stołów — DEMO</span>
+    <div class="btn-arr">›</div>
+  </a>
+
+  <div class="app-notice">
+    Jeżeli po kliknięciu pojawi się ekran ze śpiącą ikonką, naciśnij przycisk <strong>Yes, get this app back up!</strong> — to standardowe wybudzanie testowej wersji aplikacji.
+  </div>
+
+  <a href="https://smartorder.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn-primary violet">
+    <span>Konfigurator tortów — DEMO</span>
     <div class="btn-arr">›</div>
   </a>
 
@@ -375,7 +380,7 @@
     <span class="link-arr">›</span>
   </a>
 
-  <a href="/cdn-cgi/l/email-protection#2f5f4e5a434e40445b4e4d5c444e6f48424e4643014c4042" class="link-row">
+  <a href="mailto:paula@oktabska.pl" class="link-row">
     <div class="link-left">
       <div class="link-ico">✉️</div>
       <span>Wyślij e-mail</span>
@@ -386,7 +391,7 @@
   <div class="foot" id="counter">…</div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const key = 'paula_card_v4';
   try {
     const n = parseInt(localStorage.getItem(key) || '0') + 1;
@@ -397,4 +402,11 @@
         document.getElementById('counter').innerHTML = 'Wizytówka odwiedzona <b>' + d.value + '</b> razy';
       })
       .catch(() => {
-        document.getElementById('counter').innerHTML = 'Wizytówka
+        document.getElementById('counter').innerHTML = 'Wizytówka odwiedzona <b>' + n + '</b> razy';
+      });
+  } catch(e) {
+    document.getElementById('counter').innerHTML = '';
+  }
+</script>
+</body>
+</html>
